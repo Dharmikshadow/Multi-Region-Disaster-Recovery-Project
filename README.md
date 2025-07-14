@@ -20,33 +20,57 @@ The architecture involves provisioning AWS resources across two regions to creat
 3-Tier Architecture
 
 📘1. Presentation Tier (Web Layer)
+
 •	ALB (Application Load Balancer) in both regions
+
 •	Route 53 with DNS failover configured
+
 •	Static website image served from S3 bucket (for frontend use)
+
 •	Access Layer where user traffic lands
+
 ________________________________________
 🧠 2. Application Tier (Logic Layer)
+
 •	EC2 Auto Scaling Groups (ASG) in private subnets
+
 •	Hosts application logic or API backend (stateless compute)
+
 •	Connected to ALBs via target groups
+
 ________________________________________
 💾 3. Database Tier (Data Layer)
+
 •	Amazon RDS MySQL:
+
 o	Primary in Active region (Multi-AZ enabled)
+
 o	Read Replica in Pilot region
+
 ________________________________________
 ☁️ Supporting Components
+
 •	Security Groups for each tier
+
 •	Private/Public Subnets in both regions
+
 •	NAT Gateways & IGWs
+
 •	S3 buckets with replication
+
 •	Terraform modularized infrastructure
+
 ________________________________________
 🌎 Disaster Recovery Built In
+
 •	Route 53 DNS failover ensures auto-switching between Active and Pilot
+
 •	Cross-region S3 replication
+
 •	Read replica for RDS
+
 •	Fully duplicated network setup
+
 
 Brief about the services used:
 
